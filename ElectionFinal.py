@@ -21,7 +21,7 @@ def valid_check(yetgen_id):
     Lines = file1.readlines()
 
     for line in Lines:
-        if int(yetgen_id) == int(line):
+        if int(yetgen_id) == int(line.rstrip("\n")):
             return False
     return True
 
@@ -40,21 +40,21 @@ def end_election():
 
     seçimler = ["Python İttifakı", "Java İttifakı"]
     liderler = ["x", "y", "z", "t"]
-    lidere_göre_oy_sayıları = [[0,0],[0,0],[0,0],[0,0]] # Bu ksıım elbette lider sayısına göre güncellenecek
+    lidere_göre_oy_sayilari = [[0,0],[0,0],[0,0],[0,0]] # Bu ksıım elbette lider sayısına göre güncellenecek
 
     for voter in voters:
         seçim = voter.seçim
         lider = voter.lider
         if seçim == "a":
-            lidere_göre_oy_sayıları[liderler.index(lider)][0] += 1
+            lidere_göre_oy_sayilari[liderler.index(lider)][0] += 1
         if seçim == "b":
-            lidere_göre_oy_sayıları[liderler.index(lider)][1] += 1
+            lidere_göre_oy_sayilari[liderler.index(lider)][1] += 1
 
     java_toplam = 0
     python_toplam = 0
-    for i in range(len(lidere_göre_oy_sayıları)):
-        java_toplam += lidere_göre_oy_sayıları[i][1]
-        python_toplam += lidere_göre_oy_sayıları[i][0]
+    for i in range(len(lidere_göre_oy_sayilari)):
+        java_toplam += lidere_göre_oy_sayilari[i][1]
+        python_toplam += lidere_göre_oy_sayilari[i][0]
        
     toplam_oy = len(voters)
     beklenen_oy = 25
@@ -77,7 +77,7 @@ def end_election():
     for i in range(len(liderler)):
         row = i//2
         col = i%2
-        axs[row,col].bar(seçimler, lidere_göre_oy_sayıları[i])
+        axs[row,col].bar(seçimler, lidere_göre_oy_sayilari[i])
         axs[row,col].set_title(f"Lidere göre seçim sonuçları ({liderler[i]})")
         axs[row,col].set_xlabel("Parti")
         axs[row,col].set_ylabel("Oy sayıları") 
