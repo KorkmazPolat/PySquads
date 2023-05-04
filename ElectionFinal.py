@@ -17,11 +17,11 @@ class Voter:
 voters = []
 
 def valid_check(yetgen_id):
-    file1 = open("YetkinGencler.txt","r")
+    file1 = open("YetkinGencler2.txt","r")
     Lines = file1.readlines()
 
     for line in Lines:
-        if int(yetgen_id) == int(line.rstrip("\n")):
+        if int(yetgen_id) == int(line):
             return False
     return True
 
