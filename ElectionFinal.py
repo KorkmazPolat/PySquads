@@ -16,6 +16,7 @@ class Voter:
 
 voters = []
 
+""" Bu method kişnin yetgen mensubu olup olmadığını kontrol ediyor.  Eğer methodun aldığı input yetgingenvler.txt dosyasının içerisinde ise False döndürüyor. """
 def valid_check(yetgen_id):
     file1 = open("YetkinGencler2.txt","r")
     Lines = file1.readlines()
@@ -25,6 +26,8 @@ def valid_check(yetgen_id):
             return False
     return True
 
+""" Bu method kişinin daha önce oy verip vermediğini kontrol ediyor. Bunu ise voters listesisinin elemanlarına bakarak yapıyor. Eğer methodun aldığı input
+bu listenin elemanlarının(Bu listenin elemanlarının hepsi birer object-Voter class'ı kullanılarak yaratılan- eğer eşleşme bulursa True döndürüyor, yoksa false döndürüyor) """
 def multiple_check(yetgen_id):
     # Burada kişinin daha önce oy kullanıp kullanmadığı kontrol ediliyor.
     for voter in voters:
@@ -33,6 +36,15 @@ def multiple_check(yetgen_id):
     return False
     # Aynı kısımda kişinin yetgen üyesi olup olmadığı kontrol edilebilir.
 
+
+"""
+def end_election():
+Bu method aslında maşn method olarak düşünülebilir. Bir başka deyişle seçimi sonlandır butonuna basıldığında gerçekleşmesini istediğimiz olaylar.
+1-Öncelikle voters listesinde bulunan tüm objeler str methodu(Class'ta yazılmış olan method) ile dosya içerisine yazılıyor.(Bilgileri sakladığımız kısı dosya aslında başka bir işe yaramıyor.)
+2-Daha sonra bir döngü içerinde lidere bağlı toplam oy sayılarını buluyor.
+3- Javanın ve pythonun toplam aldığı oyları hesaplıyor.
+4-Matplotlib ve hesaplana bilgileri kullanarak gerekli grafikleri ekrana yazdırıyor.
+"""
 def end_election():
     with open("oy_bilgileri","w") as f:
         for voter in voters:
@@ -85,6 +97,16 @@ def end_election():
     plt.tight_layout()
     plt.show()
 
+"""
+oy_ver():
+Bu method aslında oy ver butonuna bastığımızda gerçekleşmesini istediğimiz olaylar:
+1- Arayüz üzerinde yazılmış ya da işaretlenmiş bilgileri input olarak alıyor.
+2- Multiple_check ve valid_check methodlarını kullanrak kişinin oy vermeye uygun olup olmadığına bakıyor.
+3- Eğer kişi uygunsa, bu bilgileri kullanarak bir Voter objesi yaratıyor(class konusu)
+4- Oluşturulmuş olan objeyi(Oy veren kişinin bilgisi) voters listesine ekliyor. Böylece oy veren herkesin bilgileri bi listede toplanmış oluyor.
+5- En sonda ise arayüzün fieldlarını temizleyerek bir sonraki kişi için hazır hale getiriyor.
+
+"""
 def oy_ver():
     voter_id = id_field.get()
     voter_isim = isim_field.get()
@@ -108,7 +130,9 @@ def oy_ver():
 
 
 
-
+"""
+Arayüz oluşturma kısmı
+"""
 root = tk.Tk()
 root.geometry("300x285")
 root.title("13 Mayıs YetGen Seçimi")
