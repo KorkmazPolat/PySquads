@@ -1,7 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
 import numpy as np
+# Oylamalar hala gözüküyor a ya da b olarak .)
 
 class Voter:
     def __init__(self,yetgen_id,isim,soyisim,seçim,lider):
@@ -12,7 +14,7 @@ class Voter:
         self.lider = lider
 
     def __str__(self):
-        return f"{self.yetgen_id},{self.isim},{self.soyisim},{self.seçim},{self.lider}"
+        return f"{self.yetgen_id},{self.isim},{self.soyisim},{self.lider}"
 
 voters = []
 
@@ -51,7 +53,7 @@ def end_election():
             f.write(str(voter) + "\n")
 
     seçimler = ["Python İttifakı", "Java İttifakı"]
-    liderler = ["x", "y", "z", "t"]
+    liderler = ["Enes", "Mustafa", "Begüm", "Ahmet"]
     lidere_göre_oy_sayilari = [[0,0],[0,0],[0,0],[0,0]] # Bu ksıım elbette lider sayısına göre güncellenecek
 
     for voter in voters:
@@ -77,11 +79,18 @@ def end_election():
     x_values = ["Python İttifakı","Java İttifakı"]
     y_values = [python_toplam,java_toplam]
 
-    fig, (axs1, ax2) = plt.subplots(1,2,figsize=(16,5))
-    axs1.pie(sizes,labels=labels)
-    axs1.set_title("Seçime katılım oranı")
+    explode = [0,0.1]
+    colors = [
+        "#1bf54e",
+        "#bf0808"
+    ]
 
-    ax2.bar(x_values,y_values)
+    fig, (axs1, ax2) = plt.subplots(1,2,figsize=(9,5))
+    axs1.pie(sizes,explode=explode,labels=labels,colors=colors,autopct='%1.0f%%',startangle=90)
+    axs1.set_title("Seçime Katılım Oranı")
+
+    ax2.bar(x_values,y_values,color=['#0c5a91', 'orange'])
+    ax2.yaxis.set_major_locator(MaxNLocator(integer=True))
     ax2.set_title("Genel Oylama")
 
 
@@ -89,11 +98,11 @@ def end_election():
     for i in range(len(liderler)):
         row = i//2
         col = i%2
-        axs[row,col].bar(seçimler, lidere_göre_oy_sayilari[i])
-        axs[row,col].set_title(f"Lidere göre seçim sonuçları ({liderler[i]})")
-        axs[row,col].set_xlabel("Parti")
-        axs[row,col].set_ylabel("Oy sayıları") 
-    plt.suptitle(f"Lidere bağlı seçim sonuçları ( Toplam Oy: {toplam_oy})", fontsize = 16)
+        axs[row,col].bar(seçimler, lidere_göre_oy_sayilari[i],color=['#0c5a91', 'orange'])
+        axs[row,col].yaxis.set_major_locator(MaxNLocator(integer=True))
+        axs[row,col].set_title(f"Lidere Göre Seçim Sonuçları ({liderler[i]})")
+        axs[row,col].set_ylabel("Oy Sayıları") 
+    plt.suptitle(f"Lidere Bağlı Seçim Sonuçları ( Toplam Oy: {toplam_oy})", fontsize = 16)
     plt.tight_layout()
     plt.show()
 
@@ -112,6 +121,7 @@ def oy_ver():
     voter_isim = isim_field.get()
     voter_soyisim = soyisim_field.get()
     voter_lider = lider_isim_field.get()
+    voter_lider = voter_lider.capitalize()
 
     if valid_check(voter_id):
         messagebox.showwarning("Error", "YetGen mensubu değilsiniz. Oyunuz geçerli değil.")
