@@ -39,8 +39,8 @@ def multiple_check(yetgen_id):
 
 """
 def end_election():
-Bu method aslında maşn method olarak düşünülebilir. Bir başka deyişle seçimi sonlandır butonuna basıldığında gerçekleşmesini istediğimiz olaylar.
-1-Öncelikle voters listesinde bulunan tüm objeler str methodu(Class'ta yazılmış olan method) ile dosya içerisine yazılıyor.(Bilgileri sakladığımız kısı dosya aslında başka bir işe yaramıyor.)
+Bu method aslında main method olarak düşünülebilir. Bir başka deyişle seçimi sonlandır butonuna basıldığında gerçekleşmesini istediğimiz olaylar.
+1-Öncelikle voters listesinde bulunan tüm objeler str methodu(Class'ta yazılmış olan method) ile dosya içerisine yazılıyor.(Bilgileri sakladığımız kısım, dosya aslında başka bir işe yaramıyor.)
 2-Daha sonra bir döngü içerinde lidere bağlı toplam oy sayılarını buluyor.
 3- Javanın ve pythonun toplam aldığı oyları hesaplıyor.
 4-Matplotlib ve hesaplana bilgileri kullanarak gerekli grafikleri ekrana yazdırıyor.
@@ -77,7 +77,7 @@ def end_election():
     x_values = ["Python İttifakı","Java İttifakı"]
     y_values = [python_toplam,java_toplam]
 
-    fig, (axs1, ax2) = plt.subplots(1,2,figsize=(10,5))
+    fig, (axs1, ax2) = plt.subplots(1,2,figsize=(16,5))
     axs1.pie(sizes,labels=labels)
     axs1.set_title("Seçime katılım oranı")
 
