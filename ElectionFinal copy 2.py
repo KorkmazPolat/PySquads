@@ -53,8 +53,8 @@ def end_election():
             f.write(str(voter) + "\n")
 
     seçimler = ["Python İttifakı", "Java İttifakı"]
-    liderler = ["Enes", "Mustafa", "Begüm", "Ahmet","Mertcan","Hakan","Metin","Mücahit"]
-    lidere_göre_oy_sayilari = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]] # Bu ksıım elbette lider sayısına göre güncellenecek
+    liderler = ["Enes", "Mustafa", "Begüm", "Ahmet"]
+    lidere_göre_oy_sayilari = [[0,0],[0,0],[0,0],[0,0]] # Bu ksıım elbette lider sayısına göre güncellenecek
 
     for voter in voters:
         seçim = voter.seçim
@@ -86,8 +86,7 @@ def end_election():
     ]
 
     fig, (axs1, ax2) = plt.subplots(1,2,figsize=(9,5))
-    axs1.pie(sizes,explode=explode,colors=colors,autopct='%1.0f%%',startangle=90)
-    axs1.legend(["Seçime Katılanlar","Seçime Katılmayanlar"],loc=3,fontsize=10)
+    axs1.pie(sizes,explode=explode,labels=labels,colors=colors,autopct='%1.0f%%',startangle=90)
     axs1.set_title("Seçime Katılım Oranı")
 
     ax2.bar(x_values,y_values,color=['#0c5a91', 'orange'])
@@ -95,10 +94,10 @@ def end_election():
     ax2.set_title("Genel Oylama")
 
 
-    fig, axs = plt.subplots(2,4, figsize=(16,8))
+    fig, axs = plt.subplots(2,2, figsize=(10,8))
     for i in range(len(liderler)):
-        row = i//4
-        col = i%4
+        row = i//2
+        col = i%2
         axs[row,col].bar(seçimler, lidere_göre_oy_sayilari[i],color=['#0c5a91', 'orange'])
         axs[row,col].yaxis.set_major_locator(MaxNLocator(integer=True))
         axs[row,col].set_title(f"Lidere Göre Seçim Sonuçları ({liderler[i]})")
