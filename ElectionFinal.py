@@ -28,7 +28,8 @@ def valid_check(yetgen_id):
             return False
     return True
 
-""" Bu method kişinin daha önce oy verip vermediğini kontrol ediyor. Bunu ise voters listesisinin elemanlarına bakarak yapıyor. Eğer methodun aldığı input
+
+    """ Bu method kişinin daha önce oy verip vermediğini kontrol ediyor. Bunu ise voters listesisinin elemanlarına bakarak yapıyor. Eğer methodun aldığı input
 bu listenin elemanlarının(Bu listenin elemanlarının hepsi birer object-Voter class'ı kullanılarak yaratılan- eğer eşleşme bulursa True döndürüyor, yoksa false döndürüyor) """
 def multiple_check(yetgen_id):
     # Burada kişinin daha önce oy kullanıp kullanmadığı kontrol ediliyor.
@@ -138,7 +139,6 @@ def oy_ver():
     soyisim_field.delete(0,tk.END)
     lider_isim_field.delete(0,tk.END)
     seçim_var.set(0)
-
 
 
 """
