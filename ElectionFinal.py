@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import messagebox
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
-import numpy as np
 
 
 class Voter:
@@ -20,8 +19,14 @@ voters = []
 
 """ Bu method kişnin yetgen mensubu olup olmadığını kontrol ediyor.  Eğer methodun aldığı input yetgingenvler.txt dosyasının içerisinde ise False döndürüyor. """
 def valid_check(yetgen_id):
-    file1 = open("YetkinGencler2.txt","r")
-    Lines = file1.readlines()
+
+    try:
+        file1 = open("YetkinGencler2.txt","r")
+        Lines = file1.readlines()
+    except FileNotFoundError:
+        print(f"Error: dosya bulunamadı {file1}")
+    except IOError as e:
+        print(f"Error: {e}")
 
     for line in Lines:
         if int(yetgen_id) == int(line):
@@ -55,7 +60,7 @@ def end_election():
 
     seçimler = ["Python İttifakı", "Java İttifakı"]
     liderler = ["Enes", "Mustafa", "Begüm", "Ahmet","Mertcan","Hakan","Metin","Mücahit"]
-    lidere_göre_oy_sayilari = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]] # Bu ksıım elbette lider sayısına göre güncellenecek
+    lidere_göre_oy_sayilari = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]] # Bu kısım elbette lider sayısına göre güncellenecek
 
     for voter in voters:
         seçim = voter.seçim
@@ -64,6 +69,7 @@ def end_election():
             lidere_göre_oy_sayilari[liderler.index(lider)][0] += 1
         if seçim == "b":
             lidere_göre_oy_sayilari[liderler.index(lider)][1] += 1
+    
 
     java_toplam = 0
     python_toplam = 0
@@ -147,7 +153,6 @@ Arayüz oluşturma kısmı
 root = tk.Tk()
 root.geometry("300x285")
 root.title("13 Mayıs YetGen Seçimi")
-
 
 id_label = tk.Label(root, text="YetGen ID:")
 id_label.grid(row=0, column=0, padx=15,pady=5)
