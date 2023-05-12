@@ -3,14 +3,16 @@ from tkinter import messagebox
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 
-
+#13 Mayıs 2023 Yetgen Seçimleri
 class Voter:
+    # Class yapısı, her bir oy veren kişiyi temsil ediyor.
     def __init__(self,yetgen_id,isim,soyisim,seçim,lider):
         self.yetgen_id = yetgen_id
         self.isim = isim
         self.soyisim = soyisim
         self.seçim = seçim
         self.lider = lider
+
 
     def __str__(self):
         return f"{self.yetgen_id},{self.isim},{self.soyisim},{self.lider}"
@@ -73,7 +75,10 @@ def end_election():
 
     java_toplam = 0
     python_toplam = 0
+
+    
     for i in range(len(lidere_göre_oy_sayilari)):
+        # Oyların aday başına hesaplanması
         java_toplam += lidere_göre_oy_sayilari[i][1]
         python_toplam += lidere_göre_oy_sayilari[i][0]
        
